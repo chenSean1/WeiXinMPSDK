@@ -27,9 +27,6 @@ Detail: https://github.com/JeffreySu/WeiXinMPSDK/blob/master/license.md
 
     修改标识：Senparc - 20160719
     修改描述：增加其接口的异步方法
-
-    修改标识：Senparc - 20170707
-    修改描述：v14.5.1 完善异步方法async/await
 ----------------------------------------------------------------*/
 
 using Senparc.Weixin.MP.AdvancedAPIs.UserTag;
@@ -233,7 +230,7 @@ namespace Senparc.Weixin.MP.AdvancedAPIs
         /// <returns></returns>
         public static async Task <CreateTagResult> CreateAsync(string accessTokenOrAppId,string name, int timeOut = Config.TIME_OUT)
         {
-            return await ApiHandlerWapper.TryCommonApiAsync(async accessToken =>
+            return await ApiHandlerWapper.TryCommonApiAsync( accessToken =>
             {
                 var urlFormat = "https://api.weixin.qq.com/cgi-bin/tags/create?access_token={0}";
                 var data = new
@@ -243,7 +240,7 @@ namespace Senparc.Weixin.MP.AdvancedAPIs
                         name = name
                     }
                 };
-                return await Senparc .Weixin .CommonAPIs .CommonJsonSend.SendAsync<CreateTagResult>(accessToken, urlFormat, data, timeOut: timeOut);
+                return Senparc .Weixin .CommonAPIs .CommonJsonSend.SendAsync<CreateTagResult>(accessToken, urlFormat, data, timeOut: timeOut);
             }, accessTokenOrAppId);
         }
         /// <summary>
@@ -253,11 +250,11 @@ namespace Senparc.Weixin.MP.AdvancedAPIs
         /// <returns></returns>
         public static async Task<TagJson> GetAsync(string accessTokenOrAppId)
         {
-            return await ApiHandlerWapper.TryCommonApiAsync(async accessToken =>
+            return await ApiHandlerWapper.TryCommonApiAsync( accessToken =>
             {
                 var urlFormat = "https://api.weixin.qq.com/cgi-bin/tags/get?access_token={0}";
                 var url = string.Format(urlFormat, accessToken);
-                return await HttpUtility.Get.GetJsonAsync<TagJson>(url);
+                return HttpUtility.Get.GetJsonAsync<TagJson>(url);
 
             }, accessTokenOrAppId);
         }
@@ -271,7 +268,7 @@ namespace Senparc.Weixin.MP.AdvancedAPIs
         /// <returns></returns>
         public  static async Task<WxJsonResult> UpdateAsync(string accessTokenOrAppId, int id, string name, int timeOut = Config.TIME_OUT)
         {
-            return await ApiHandlerWapper.TryCommonApiAsync(async accessToken =>
+            return await ApiHandlerWapper.TryCommonApiAsync( accessToken =>
             {
                 var urlFormat = "https://api.weixin.qq.com/cgi-bin/tags/update?access_token={0}";
                 var data = new
@@ -282,7 +279,7 @@ namespace Senparc.Weixin.MP.AdvancedAPIs
                         name = name
                     }
                 };
-                return await Senparc .Weixin .CommonAPIs .CommonJsonSend.SendAsync<WxJsonResult>(accessToken, urlFormat, data, timeOut: timeOut);
+                return Senparc .Weixin .CommonAPIs .CommonJsonSend.SendAsync<WxJsonResult>(accessToken, urlFormat, data, timeOut: timeOut);
 
             }, accessTokenOrAppId);
         }
@@ -295,7 +292,7 @@ namespace Senparc.Weixin.MP.AdvancedAPIs
         /// <returns></returns>
         public static async Task<WxJsonResult> DeleteAsync(string accessTokenOrAppId, int id, int timeOut = Config.TIME_OUT)
         {
-            return await ApiHandlerWapper.TryCommonApiAsync(async accessToken =>
+            return await ApiHandlerWapper.TryCommonApiAsync( accessToken =>
             {
                 var urlFormat = "https://api.weixin.qq.com/cgi-bin/tags/delete?access_token={0}";
 
@@ -307,7 +304,7 @@ namespace Senparc.Weixin.MP.AdvancedAPIs
                     }
                 };
 
-                return await Senparc .Weixin .CommonAPIs .CommonJsonSend.SendAsync<WxJsonResult>(accessToken, urlFormat, data, CommonJsonSendType.POST, timeOut);
+                return Senparc .Weixin .CommonAPIs .CommonJsonSend.SendAsync<WxJsonResult>(accessToken, urlFormat, data, CommonJsonSendType.POST, timeOut);
 
             }, accessTokenOrAppId);
         }
@@ -321,7 +318,7 @@ namespace Senparc.Weixin.MP.AdvancedAPIs
         /// <returns></returns>
         public static async Task<UserTagJsonResult> GetAsync(string accessTokenOrAppId, int tagid,string nextOpenid="", int timeOut = Config.TIME_OUT)
         {
-            return await ApiHandlerWapper.TryCommonApiAsync(async accessToken =>
+            return await ApiHandlerWapper.TryCommonApiAsync( accessToken =>
             {
                 var urlFormat = "https://api.weixin.qq.com/cgi-bin/user/tag/get?access_token={0}";
                 var data = new
@@ -329,7 +326,7 @@ namespace Senparc.Weixin.MP.AdvancedAPIs
                     tagid = tagid,
                     next_openid = nextOpenid
                 };
-                return await Senparc .Weixin .CommonAPIs .CommonJsonSend.SendAsync<UserTagJsonResult>(accessToken, urlFormat, data, CommonJsonSendType.POST, timeOut);
+                return Senparc .Weixin .CommonAPIs .CommonJsonSend.SendAsync<UserTagJsonResult>(accessToken, urlFormat, data, CommonJsonSendType.POST, timeOut);
             }, accessTokenOrAppId);
         }
         /// <summary>
@@ -342,7 +339,7 @@ namespace Senparc.Weixin.MP.AdvancedAPIs
         /// <returns></returns>
         public static async Task<WxJsonResult> BatchTaggingAsync(string accessTokenOrAppId,int tagid,List<string> openid_list,int timeOut = Config.TIME_OUT)
         {
-            return await ApiHandlerWapper.TryCommonApiAsync(async accessToken =>
+            return await ApiHandlerWapper.TryCommonApiAsync( accessToken =>
             {
                 var urlFormat = "https://api.weixin.qq.com/cgi-bin/tags/members/batchtagging?access_token={0}";
                 var data = new
@@ -350,7 +347,7 @@ namespace Senparc.Weixin.MP.AdvancedAPIs
                     openid_list = openid_list,
                     tagid = tagid
                 };
-                return await Senparc .Weixin .CommonAPIs .CommonJsonSend.SendAsync<WxJsonResult>(accessToken, urlFormat, data, CommonJsonSendType.POST, timeOut);
+                return Senparc .Weixin .CommonAPIs .CommonJsonSend.SendAsync<WxJsonResult>(accessToken, urlFormat, data, CommonJsonSendType.POST, timeOut);
 
             }, accessTokenOrAppId);
         }
@@ -364,7 +361,7 @@ namespace Senparc.Weixin.MP.AdvancedAPIs
         /// <returns></returns>
         public static async Task<WxJsonResult> BatchUntaggingAsync(string accessTokenOrAppId, int tagid, List<string> openid_list, int timeOut = Config.TIME_OUT)
         {
-            return await ApiHandlerWapper.TryCommonApiAsync(async accessToken =>
+            return await ApiHandlerWapper.TryCommonApiAsync( accessToken =>
             {
                 var urlFormat = "https://api.weixin.qq.com/cgi-bin/tags/members/batchuntagging?access_token={0}";
                 var data = new
@@ -372,7 +369,7 @@ namespace Senparc.Weixin.MP.AdvancedAPIs
                     openid_list = openid_list,
                     tagid = tagid
                 };
-                return await Senparc .Weixin .CommonAPIs .CommonJsonSend.SendAsync<WxJsonResult>(accessToken, urlFormat, data, CommonJsonSendType.POST, timeOut);
+                return Senparc .Weixin .CommonAPIs .CommonJsonSend.SendAsync<WxJsonResult>(accessToken, urlFormat, data, CommonJsonSendType.POST, timeOut);
 
             }, accessTokenOrAppId);
         }
@@ -385,14 +382,14 @@ namespace Senparc.Weixin.MP.AdvancedAPIs
         /// <returns></returns>
         public static async Task<UserTagListResult> UserTagListAsync(string accessTokenOrAppid,string openid,int timeOut = Config.TIME_OUT)
         {
-            return await ApiHandlerWapper.TryCommonApiAsync(async accessToken =>
+            return await ApiHandlerWapper.TryCommonApiAsync( accessToken =>
             {
                 var urlFormat = "https://api.weixin.qq.com/cgi-bin/tags/getidlist?access_token={0}";
                 var data = new
                 {
                     openid = openid
                 };
-                return await Senparc .Weixin .CommonAPIs .CommonJsonSend.SendAsync<UserTagListResult>(accessToken, urlFormat, data, CommonJsonSendType.POST, timeOut);
+                return Senparc .Weixin .CommonAPIs .CommonJsonSend.SendAsync<UserTagListResult>(accessToken, urlFormat, data, CommonJsonSendType.POST, timeOut);
             }, accessTokenOrAppid);
         }
         #endregion

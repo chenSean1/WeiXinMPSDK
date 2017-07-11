@@ -39,9 +39,6 @@ Detail: https://github.com/JeffreySu/WeiXinMPSDK/blob/master/license.md
     修改标识：Senparc - 20160719
     修改描述：增加其接口的异步方法
 
-    修改标识：Senparc - 20170707
-    修改描述：v14.5.1 完善异步方法async/await
-
 ----------------------------------------------------------------*/
 
 /*
@@ -159,11 +156,11 @@ namespace Senparc.Weixin.MP.AdvancedAPIs
         /// <returns></returns>
         public static async Task<UserInfoJson> InfoAsync(string accessTokenOrAppId, string openId, Language lang = Language.zh_CN)
         {
-            return await ApiHandlerWapper.TryCommonApiAsync(async accessToken =>
+            return await ApiHandlerWapper.TryCommonApiAsync(accessToken =>
            {
                string url = string.Format("https://api.weixin.qq.com/cgi-bin/user/info?access_token={0}&openid={1}&lang={2}",
                    accessToken.AsUrlData(), openId.AsUrlData(), lang.ToString("g").AsUrlData());
-               return await HttpUtility.Get.GetJsonAsync<UserInfoJson>(url);
+               return HttpUtility.Get.GetJsonAsync<UserInfoJson>(url);
 
                 //错误时微信会返回错误码等信息，JSON数据包示例如下（该示例为AppID无效错误）:
                 //{"errcode":40013,"errmsg":"invalid appid"}
@@ -179,14 +176,14 @@ namespace Senparc.Weixin.MP.AdvancedAPIs
         /// <returns></returns>
         public static async Task<OpenIdResultJson> GetAsync(string accessTokenOrAppId, string nextOpenId)
         {
-            return await ApiHandlerWapper.TryCommonApiAsync(async accessToken =>
+            return await ApiHandlerWapper.TryCommonApiAsync(accessToken =>
            {
                string url = string.Format("https://api.weixin.qq.com/cgi-bin/user/get?access_token={0}", accessToken.AsUrlData());
                if (!string.IsNullOrEmpty(nextOpenId))
                {
                    url += "&next_openid=" + nextOpenId;
                }
-               return await HttpUtility.Get.GetJsonAsync<OpenIdResultJson>(url);
+               return HttpUtility.Get.GetJsonAsync<OpenIdResultJson>(url);
 
            }, accessTokenOrAppId);
         }
@@ -201,7 +198,7 @@ namespace Senparc.Weixin.MP.AdvancedAPIs
         /// <returns></returns>
         public static async Task<WxJsonResult> UpdateRemarkAsync(string accessTokenOrAppId, string openId, string remark, int timeOut = Config.TIME_OUT)
         {
-            return await ApiHandlerWapper.TryCommonApiAsync(async accessToken =>
+            return await ApiHandlerWapper.TryCommonApiAsync(accessToken =>
            {
                string url = string.Format("https://api.weixin.qq.com/cgi-bin/user/info/updateremark?access_token={0}", accessToken.AsUrlData());
                var data = new
@@ -209,7 +206,7 @@ namespace Senparc.Weixin.MP.AdvancedAPIs
                    openid = openId,
                    remark = remark
                };
-               return await Senparc.Weixin.CommonAPIs.CommonJsonSend.SendAsync<WxJsonResult>(accessToken, url, data, timeOut: timeOut);
+               return Senparc.Weixin.CommonAPIs.CommonJsonSend.SendAsync<WxJsonResult>(accessToken, url, data, timeOut: timeOut);
 
            }, accessTokenOrAppId);
         }

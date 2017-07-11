@@ -40,9 +40,6 @@ Detail: https://github.com/JeffreySu/WeiXinMPSDK/blob/master/license.md
  
     修改标识：Senparc - 20160719
     修改描述：增加其接口的异步方法
-
-    修改标识：Senparc - 20170707
-    修改描述：v14.5.1 完善异步方法async/await
 ----------------------------------------------------------------*/
 
 /*
@@ -580,7 +577,7 @@ namespace Senparc.Weixin.MP.AdvancedAPIs
         /// <returns></returns>
         public static async Task<WiFiShopListJsonResult> ShopListAsync(string accessTokenOrAppId, int pageIndex = 1, int pageSize = 10, int timeOut = Config.TIME_OUT)
         {
-            return await ApiHandlerWapper.TryCommonApiAsync(async accessToken =>
+            return await ApiHandlerWapper.TryCommonApiAsync( accessToken =>
             {
                 const string urlFormat = "https://api.weixin.qq.com/bizwifi/shop/list?access_token={0}";
 
@@ -589,7 +586,7 @@ namespace Senparc.Weixin.MP.AdvancedAPIs
                     pageindex = pageIndex,
                     pagesize = pageSize
                 };
-                return await Senparc .Weixin .CommonAPIs .CommonJsonSend.SendAsync<WiFiShopListJsonResult>(accessToken, urlFormat, data, timeOut: timeOut);
+                return Senparc .Weixin .CommonAPIs .CommonJsonSend.SendAsync<WiFiShopListJsonResult>(accessToken, urlFormat, data, timeOut: timeOut);
 
             }, accessTokenOrAppId);
         }
@@ -604,7 +601,7 @@ namespace Senparc.Weixin.MP.AdvancedAPIs
         /// <returns></returns>
         public static async Task<WiFiShopGetJsonResult> ShopGetAsync(string accessTokenOrAppId, long shopId, int pageindex = 1, int pagesize = 10, int timeOut = Config.TIME_OUT)
         {
-            return await ApiHandlerWapper.TryCommonApiAsync(async accessToken =>
+            return await ApiHandlerWapper.TryCommonApiAsync( accessToken =>
             {
                 const string urlFormat = "https://api.weixin.qq.com/bizwifi/shop/get?access_token={0}";
 
@@ -614,7 +611,7 @@ namespace Senparc.Weixin.MP.AdvancedAPIs
                     pageindex = pageindex,
                     pagesize = pagesize
                 };
-                return await Senparc.Weixin.CommonAPIs.CommonJsonSend.SendAsync<WiFiShopGetJsonResult>(accessToken, urlFormat, data, timeOut: timeOut);
+                return Senparc.Weixin.CommonAPIs.CommonJsonSend.SendAsync<WiFiShopGetJsonResult>(accessToken, urlFormat, data, timeOut: timeOut);
 
             }, accessTokenOrAppId);
         }
@@ -629,7 +626,7 @@ namespace Senparc.Weixin.MP.AdvancedAPIs
         /// <returns></returns>
         public static async Task<WxJsonResult> ShopUpdateAsync(string accessTokenOrAppId, long shopId, string oldSsid, string ssid, int timeOut = Config.TIME_OUT)
         {
-            return await ApiHandlerWapper.TryCommonApiAsync(async accessToken =>
+            return await ApiHandlerWapper.TryCommonApiAsync( accessToken =>
             {
                 const string urlFormat = "https://api.weixin.qq.com/bizwifi/shop/update?access_token={0}";
 
@@ -640,7 +637,7 @@ namespace Senparc.Weixin.MP.AdvancedAPIs
                     ssid = ssid
 
                 };
-                return await Senparc.Weixin.CommonAPIs.CommonJsonSend.SendAsync<WxJsonResult>(accessToken, urlFormat, data, timeOut: timeOut);
+                return Senparc.Weixin.CommonAPIs.CommonJsonSend.SendAsync<WxJsonResult>(accessToken, urlFormat, data, timeOut: timeOut);
 
             }, accessTokenOrAppId);
         }
@@ -654,7 +651,7 @@ namespace Senparc.Weixin.MP.AdvancedAPIs
         /// <returns></returns>
         public static async Task<WxJsonResult> ShopCleanAsync(string accessTokenOrAppId, long shopId, string ssid, int timeOut = Config.TIME_OUT)
         {
-            return await ApiHandlerWapper.TryCommonApiAsync(async accessToken =>
+            return await ApiHandlerWapper.TryCommonApiAsync( accessToken =>
             {
                 const string urlFormat = "https://api.weixin.qq.com/bizwifi/shop/clean?access_token={0}";
                 var data = new object();
@@ -676,7 +673,7 @@ namespace Senparc.Weixin.MP.AdvancedAPIs
                     };
                 }
 
-                return await Senparc.Weixin.CommonAPIs.CommonJsonSend.SendAsync<WxJsonResult>(accessToken, urlFormat, data, timeOut: timeOut);
+                return Senparc.Weixin.CommonAPIs.CommonJsonSend.SendAsync<WxJsonResult>(accessToken, urlFormat, data, timeOut: timeOut);
 
             }, accessTokenOrAppId);
         }
@@ -693,7 +690,7 @@ namespace Senparc.Weixin.MP.AdvancedAPIs
         public static async Task<WxJsonResult> AddDeviceAsync(string accessTokenOrAppId, long shopId, string ssid, string password,
             /*string bssid,*/ int timeOut = Config.TIME_OUT)
         {
-            return await ApiHandlerWapper.TryCommonApiAsync(async accessToken =>
+            return await ApiHandlerWapper.TryCommonApiAsync( accessToken =>
             {
                 const string urlFormat = "https://api.weixin.qq.com/bizwifi/device/add?access_token={0}";
 
@@ -704,7 +701,7 @@ namespace Senparc.Weixin.MP.AdvancedAPIs
                     password = password,
                     //bssid = bssid,
                 };
-                return await Senparc.Weixin.CommonAPIs.CommonJsonSend.SendAsync<WxJsonResult>(accessToken, urlFormat, data, timeOut: timeOut);
+                return Senparc.Weixin.CommonAPIs.CommonJsonSend.SendAsync<WxJsonResult>(accessToken, urlFormat, data, timeOut: timeOut);
 
             }, accessTokenOrAppId);
         }
@@ -720,7 +717,7 @@ namespace Senparc.Weixin.MP.AdvancedAPIs
         public static async Task<WiFiRegisterJsonResult> WifeRegisterAsync(string accessTokenOrAppId, long shopId, string ssid, string reset,
            int timeOut = Config.TIME_OUT)
         {
-            return await ApiHandlerWapper.TryCommonApiAsync(async accessToken =>
+            return await ApiHandlerWapper.TryCommonApiAsync( accessToken =>
             {
                 const string urlFormat = "https://api.weixin.qq.com/bizwifi/apportal/register?access_token={0}";
 
@@ -730,7 +727,7 @@ namespace Senparc.Weixin.MP.AdvancedAPIs
                     ssid = ssid,
                     reset = reset,
                 };
-                return await Senparc.Weixin.CommonAPIs.CommonJsonSend.SendAsync<WiFiRegisterJsonResult>(accessToken, urlFormat, data, timeOut: timeOut);
+                return Senparc.Weixin.CommonAPIs.CommonJsonSend.SendAsync<WiFiRegisterJsonResult>(accessToken, urlFormat, data, timeOut: timeOut);
 
             }, accessTokenOrAppId);
         }
@@ -748,7 +745,7 @@ namespace Senparc.Weixin.MP.AdvancedAPIs
         public static async Task<GetDeviceListResult> GetDeviceListAsync(string accessTokenOrAppId, int pageIndex = 1, int pageSize = 10,
             long? shopId = null, int timeOut = Config.TIME_OUT)
         {
-            return await ApiHandlerWapper.TryCommonApiAsync(async accessToken =>
+            return await ApiHandlerWapper.TryCommonApiAsync( accessToken =>
             {
                 const string urlFormat = "https://api.weixin.qq.com/bizwifi/device/list?access_token={0}";
 
@@ -772,7 +769,7 @@ namespace Senparc.Weixin.MP.AdvancedAPIs
                     };
                 }
 
-                return await Senparc.Weixin.CommonAPIs.CommonJsonSend.SendAsync<GetDeviceListResult>(accessToken, urlFormat, data, timeOut: timeOut);
+                return Senparc.Weixin.CommonAPIs.CommonJsonSend.SendAsync<GetDeviceListResult>(accessToken, urlFormat, data, timeOut: timeOut);
 
             }, accessTokenOrAppId);
         }
@@ -786,7 +783,7 @@ namespace Senparc.Weixin.MP.AdvancedAPIs
         /// <returns></returns>
         public static async Task<WxJsonResult> DeleteDeviceAsync(string accessTokenOrAppId, string bssid, int timeOut = Config.TIME_OUT)
         {
-            return await ApiHandlerWapper.TryCommonApiAsync(async accessToken =>
+            return await ApiHandlerWapper.TryCommonApiAsync( accessToken =>
             {
                 const string urlFormat = "https://api.weixin.qq.com/bizwifi/device/delete?access_token={0}";
 
@@ -795,7 +792,7 @@ namespace Senparc.Weixin.MP.AdvancedAPIs
                     bssid = bssid
                 };
 
-                return await Senparc .Weixin .CommonAPIs .CommonJsonSend.SendAsync<WxJsonResult>(accessToken, urlFormat, data, timeOut: timeOut);
+                return Senparc .Weixin .CommonAPIs .CommonJsonSend.SendAsync<WxJsonResult>(accessToken, urlFormat, data, timeOut: timeOut);
 
             }, accessTokenOrAppId);
         }
@@ -811,7 +808,7 @@ namespace Senparc.Weixin.MP.AdvancedAPIs
         public static async Task<GetQrcodeResult> GetQrcodeAsync(string accessTokenOrAppId, long shopId, int imgId,
             int timeOut = Config.TIME_OUT)
         {
-            return await ApiHandlerWapper.TryCommonApiAsync(async accessToken =>
+            return await ApiHandlerWapper.TryCommonApiAsync( accessToken =>
             {
                 const string urlFormat = "https://api.weixin.qq.com/bizwifi/qrcode/get?access_token={0}";
 
@@ -821,7 +818,7 @@ namespace Senparc.Weixin.MP.AdvancedAPIs
                     img_id = imgId
                 };
 
-                return await Senparc.Weixin.CommonAPIs.CommonJsonSend.SendAsync<GetQrcodeResult>(accessToken, urlFormat, data, timeOut: timeOut);
+                return Senparc.Weixin.CommonAPIs.CommonJsonSend.SendAsync<GetQrcodeResult>(accessToken, urlFormat, data, timeOut: timeOut);
 
             }, accessTokenOrAppId);
         }
@@ -838,7 +835,7 @@ namespace Senparc.Weixin.MP.AdvancedAPIs
         public static async Task<WxJsonResult> SetHomePageAsync(string accessTokenOrAppId, long shopId, string url = null,
             int timeOut = Config.TIME_OUT)
         {
-            return await ApiHandlerWapper.TryCommonApiAsync(async accessToken =>
+            return await ApiHandlerWapper.TryCommonApiAsync( accessToken =>
             {
                 const string urlFormat = "https://api.weixin.qq.com/bizwifi/homepage/set?access_token={0}";
 
@@ -865,7 +862,7 @@ namespace Senparc.Weixin.MP.AdvancedAPIs
                     };
                 }
 
-                return await Senparc.Weixin.CommonAPIs.CommonJsonSend.SendAsync<WxJsonResult>(accessToken, urlFormat, data, timeOut: timeOut);
+                return Senparc.Weixin.CommonAPIs.CommonJsonSend.SendAsync<WxJsonResult>(accessToken, urlFormat, data, timeOut: timeOut);
 
             }, accessTokenOrAppId);
         }
@@ -880,7 +877,7 @@ namespace Senparc.Weixin.MP.AdvancedAPIs
         public static async Task<GetHomePageResult> GetHomePageaAsync(string accessTokenOrAppId, long shopId,
             int timeOut = Config.TIME_OUT)
         {
-            return await ApiHandlerWapper.TryCommonApiAsync(async accessToken =>
+            return await ApiHandlerWapper.TryCommonApiAsync( accessToken =>
             {
                 const string urlFormat = "https://api.weixin.qq.com/bizwifi/homepage/get?access_token={0}";
 
@@ -889,7 +886,7 @@ namespace Senparc.Weixin.MP.AdvancedAPIs
                     shop_id = shopId,
                 };
 
-                return await Senparc.Weixin.CommonAPIs.CommonJsonSend.SendAsync<GetHomePageResult>(accessToken, urlFormat, data, timeOut: timeOut);
+                return Senparc.Weixin.CommonAPIs.CommonJsonSend.SendAsync<GetHomePageResult>(accessToken, urlFormat, data, timeOut: timeOut);
 
             }, accessTokenOrAppId);
         }
@@ -905,7 +902,7 @@ namespace Senparc.Weixin.MP.AdvancedAPIs
         public static async Task<WxJsonResult> SetBarAsync(string accessTokenOrAppId, long shopId, int barType,
             int timeOut = Config.TIME_OUT)
         {
-            return await ApiHandlerWapper.TryCommonApiAsync(async accessToken =>
+            return await ApiHandlerWapper.TryCommonApiAsync( accessToken =>
             {
                 const string urlFormat = "https://api.weixin.qq.com/bizwifi/bar/set?access_token={0}";
 
@@ -916,7 +913,7 @@ namespace Senparc.Weixin.MP.AdvancedAPIs
                     };
 
 
-                return await Senparc.Weixin.CommonAPIs.CommonJsonSend.SendAsync<WxJsonResult>(accessToken, urlFormat, data, timeOut: timeOut);
+                return Senparc.Weixin.CommonAPIs.CommonJsonSend.SendAsync<WxJsonResult>(accessToken, urlFormat, data, timeOut: timeOut);
 
             }, accessTokenOrAppId);
         }
@@ -932,7 +929,7 @@ namespace Senparc.Weixin.MP.AdvancedAPIs
         public static async Task<WxJsonResult> SetFinishpageAsync(string accessTokenOrAppId, long shopId, string finishPageUrl,
             int timeOut = Config.TIME_OUT)
         {
-            return await ApiHandlerWapper.TryCommonApiAsync(async accessToken =>
+            return await ApiHandlerWapper.TryCommonApiAsync( accessToken =>
             {
                 const string urlFormat = "https://api.weixin.qq.com/bizwifi/finishpage/set?access_token={0}";
 
@@ -943,7 +940,7 @@ namespace Senparc.Weixin.MP.AdvancedAPIs
                 };
 
 
-                return await Senparc.Weixin.CommonAPIs.CommonJsonSend.SendAsync<WxJsonResult>(accessToken, urlFormat, data, timeOut: timeOut);
+                return Senparc.Weixin.CommonAPIs.CommonJsonSend.SendAsync<WxJsonResult>(accessToken, urlFormat, data, timeOut: timeOut);
 
             }, accessTokenOrAppId);
         }
@@ -961,7 +958,7 @@ namespace Senparc.Weixin.MP.AdvancedAPIs
             long shopId = -1,
             int timeOut = Config.TIME_OUT)
         {
-            return await ApiHandlerWapper.TryCommonApiAsync(async accessToken =>
+            return await ApiHandlerWapper.TryCommonApiAsync( accessToken =>
             {
                 const string urlFormat = "https://api.weixin.qq.com/bizwifi/statistics/list?access_token={0}";
 
@@ -972,7 +969,7 @@ namespace Senparc.Weixin.MP.AdvancedAPIs
                     shop_id = shopId,
                 };
 
-                return await Senparc.Weixin.CommonAPIs.CommonJsonSend.SendAsync<GetStatisticsResult>(accessToken, urlFormat, data, timeOut: timeOut);
+                return Senparc.Weixin.CommonAPIs.CommonJsonSend.SendAsync<GetStatisticsResult>(accessToken, urlFormat, data, timeOut: timeOut);
 
             }, accessTokenOrAppId);
         }
@@ -992,7 +989,7 @@ namespace Senparc.Weixin.MP.AdvancedAPIs
         public static async Task<WxJsonResult> SetCouponPutAsync(string accessTokenOrAppId, long shopId, string cardId, string cardDescribe, string starTime, string endTime, int cardQuantity,
             int timeOut = Config.TIME_OUT)
         {
-            return await ApiHandlerWapper.TryCommonApiAsync(async accessToken =>
+            return await ApiHandlerWapper.TryCommonApiAsync( accessToken =>
             {
                 const string urlFormat = "https://api.weixin.qq.com/bizwifi/couponput/set?access_token={0}";
 
@@ -1007,7 +1004,7 @@ namespace Senparc.Weixin.MP.AdvancedAPIs
                 };
 
 
-                return await Senparc.Weixin.CommonAPIs.CommonJsonSend.SendAsync<WxJsonResult>(accessToken, urlFormat, data, timeOut: timeOut);
+                return Senparc.Weixin.CommonAPIs.CommonJsonSend.SendAsync<WxJsonResult>(accessToken, urlFormat, data, timeOut: timeOut);
 
             }, accessTokenOrAppId);
         }
@@ -1020,7 +1017,7 @@ namespace Senparc.Weixin.MP.AdvancedAPIs
         /// <returns></returns>
         public static async Task<WiFiGetCouponPutJsonResult> GetCouponPutAsync(string accessTokenOrAppId, long shopId, int timeOut = Config.TIME_OUT)
         {
-            return await ApiHandlerWapper.TryCommonApiAsync(async accessToken =>
+            return await ApiHandlerWapper.TryCommonApiAsync( accessToken =>
             {
                 const string urlFormat = "https://api.weixin.qq.com/bizwifi/couponput/get?access_token={0}";
 
@@ -1030,7 +1027,7 @@ namespace Senparc.Weixin.MP.AdvancedAPIs
                 };
 
 
-                return await Senparc.Weixin.CommonAPIs.CommonJsonSend.SendAsync<WiFiGetCouponPutJsonResult>(accessToken, urlFormat, data, timeOut: timeOut);
+                return Senparc.Weixin.CommonAPIs.CommonJsonSend.SendAsync<WiFiGetCouponPutJsonResult>(accessToken, urlFormat, data, timeOut: timeOut);
 
             }, accessTokenOrAppId);
         }
@@ -1042,11 +1039,11 @@ namespace Senparc.Weixin.MP.AdvancedAPIs
         /// <returns></returns>
         public static async Task<WiFiConnectUrlResultJson> GetConnectUrlAsync(string accessTokenOrAppId)
         {
-            return await ApiHandlerWapper.TryCommonApiAsync(async accessToken =>
+            return await ApiHandlerWapper.TryCommonApiAsync( accessToken =>
             {
                 const string urlFormat = "https://api.weixin.qq.com/bizwifi/account/get_connecturl?access_token={0}";
 
-                return await  Senparc.Weixin.CommonAPIs.CommonJsonSend.SendAsync<WiFiConnectUrlResultJson>(accessToken, urlFormat, null,
+                return Senparc.Weixin.CommonAPIs.CommonJsonSend.SendAsync<WiFiConnectUrlResultJson>(accessToken, urlFormat, null,
                     CommonJsonSendType.GET);
             }, accessTokenOrAppId);
         }
@@ -1059,7 +1056,7 @@ namespace Senparc.Weixin.MP.AdvancedAPIs
         /// <returns></returns>
         public static async Task<WiFiOpenPluginTokenJsonResult> OpenPluginTokenAsync(string accessTokenOrAppId, string callBackUrl, int timeOut = Config.TIME_OUT)
         {
-            return await ApiHandlerWapper.TryCommonApiAsync(async accessToken =>
+            return await ApiHandlerWapper.TryCommonApiAsync(accessToken =>
             {
                 const string urlFormat = "https://api.weixin.qq.com/bizwifi/openplugin/token?access_token={0}";
 
@@ -1069,7 +1066,7 @@ namespace Senparc.Weixin.MP.AdvancedAPIs
                 };
 
 
-                return await Senparc.Weixin.CommonAPIs.CommonJsonSend.SendAsync<WiFiOpenPluginTokenJsonResult>(accessToken, urlFormat, data, CommonJsonSendType.GET, timeOut: timeOut);
+                return Senparc.Weixin.CommonAPIs.CommonJsonSend.SendAsync<WiFiOpenPluginTokenJsonResult>(accessToken, urlFormat, data, CommonJsonSendType.GET, timeOut: timeOut);
 
             }, accessTokenOrAppId);
         }

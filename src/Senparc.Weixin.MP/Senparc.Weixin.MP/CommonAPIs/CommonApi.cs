@@ -45,9 +45,6 @@ Detail: https://github.com/JeffreySu/WeiXinMPSDK/blob/master/license.md
     修改标识：Senparc - 20161110
     修改描述：完善GetTicket系列方法备注
 
-    修改标识：Senparc - 20170707
-    修改描述：v14.5.1 完善异步方法async/await
-
 ----------------------------------------------------------------*/
 
 /*
@@ -184,12 +181,12 @@ namespace Senparc.Weixin.MP.CommonAPIs
         /// <returns></returns>
         public static async Task<WeixinUserInfoResult> GetUserInfoAsync(string accessTokenOrAppId, string openId)
         {
-            return await ApiHandlerWapper.TryCommonApiAsync(async accessToken =>
+            return await ApiHandlerWapper.TryCommonApiAsync(accessToken =>
            {
                var url = string.Format("http://api.weixin.qq.com/cgi-bin/user/info?access_token={0}&openid={1}",
                                        accessToken.AsUrlData(), openId.AsUrlData());
                var result = Get.GetJsonAsync<WeixinUserInfoResult>(url);
-               return await result;
+               return result;
 
            }, accessTokenOrAppId);
         }
@@ -216,13 +213,13 @@ namespace Senparc.Weixin.MP.CommonAPIs
         /// <returns></returns>
         public static async Task<JsApiTicketResult> GetTicketByAccessTokenAsync(string accessTokenOrAppId, string type = "jsapi")
         {
-            return await ApiHandlerWapper.TryCommonApiAsync(async accessToken =>
+            return await ApiHandlerWapper.TryCommonApiAsync(accessToken =>
             {
                 var url = string.Format("https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token={0}&type={1}",
                                         accessToken.AsUrlData(), type.AsUrlData());
 
                 var result = Get.GetJsonAsync<JsApiTicketResult>(url);
-                return await result;
+                return result;
 
             }, accessTokenOrAppId);
         }
@@ -234,11 +231,11 @@ namespace Senparc.Weixin.MP.CommonAPIs
         /// <returns></returns>
         public static async Task<GetCallBackIpResult> GetCallBackIpAsync(string accessTokenOrAppId)
         {
-            return await ApiHandlerWapper.TryCommonApiAsync(async accessToken =>
+            return await ApiHandlerWapper.TryCommonApiAsync(accessToken =>
             {
                 var url = string.Format("https://api.weixin.qq.com/cgi-bin/getcallbackip?access_token={0}", accessToken.AsUrlData());
 
-                return await Get.GetJsonAsync<GetCallBackIpResult>(url);
+                return Get.GetJsonAsync<GetCallBackIpResult>(url);
 
             }, accessTokenOrAppId);
         }

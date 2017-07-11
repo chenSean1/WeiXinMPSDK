@@ -7,9 +7,6 @@
     
     创建标识：Senparc - 20170617
 
-    修改标识：Senparc - 20170709
-    修改描述：v0.3.1 修复OaDataOpenApi接口AccessToken传递问题
-
 ----------------------------------------------------------------*/
 
 using System;
@@ -59,7 +56,7 @@ namespace Senparc.Weixin.Work.AdvancedAPIs.OaDataOpen
                 useridlist = userIdList
             };
 
-            return Senparc.Weixin.CommonAPIs.CommonJsonSend.Send<GetCheckinDataJsonResult>(accessToken, url, data, CommonJsonSendType.POST, timeOut);
+            return Senparc.Weixin.CommonAPIs.CommonJsonSend.Send<GetCheckinDataJsonResult>(null, url, data, CommonJsonSendType.POST, timeOut);
         }
 
 
@@ -84,7 +81,7 @@ namespace Senparc.Weixin.Work.AdvancedAPIs.OaDataOpen
                 next_spnum = next_spnum
             };
 
-            return Senparc.Weixin.CommonAPIs.CommonJsonSend.Send<GetApprovalDataJsonResult>(accessToken, url, data, CommonJsonSendType.POST, timeOut);
+            return Senparc.Weixin.CommonAPIs.CommonJsonSend.Send<GetApprovalDataJsonResult>(null, url, data, CommonJsonSendType.POST, timeOut);
         }
 
 
@@ -115,7 +112,7 @@ namespace Senparc.Weixin.Work.AdvancedAPIs.OaDataOpen
                 useridlist = userIdList
             };
 
-            return await Senparc.Weixin.CommonAPIs.CommonJsonSend.SendAsync<GetCheckinDataJsonResult>(accessToken, url, data, CommonJsonSendType.POST, timeOut);
+            return await Senparc.Weixin.CommonAPIs.CommonJsonSend.SendAsync<GetCheckinDataJsonResult>(null, url, data, CommonJsonSendType.POST, timeOut);
         }
 
 
@@ -140,7 +137,7 @@ namespace Senparc.Weixin.Work.AdvancedAPIs.OaDataOpen
                 next_spnum = next_spnum
             };
 
-            return await Senparc.Weixin.CommonAPIs.CommonJsonSend.SendAsync<GetApprovalDataJsonResult>(accessToken, url, data, CommonJsonSendType.POST, timeOut);
+            return await Senparc.Weixin.CommonAPIs.CommonJsonSend.SendAsync<GetApprovalDataJsonResult>(null, url, data, CommonJsonSendType.POST, timeOut);
         }
 
         #endregion

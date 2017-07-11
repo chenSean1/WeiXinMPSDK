@@ -1,15 +1,4 @@
-﻿/*----------------------------------------------------------------
-    Copyright (C) 2017 Senparc
-
-    文件名：CreateJsonResult.cs
-    文件功能描述：微信开放平台帐号管理接口
-    https://open.weixin.qq.com/cgi-bin/showdocument?action=dir_list&t=resource/res_list&verify=1&id=open1498704804_iARAL&token=&lang=zh_CN
-
-    创建标识：Senparc - 20170707
-    
-----------------------------------------------------------------*/
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;

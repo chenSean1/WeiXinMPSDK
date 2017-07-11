@@ -20,9 +20,6 @@
     修改描述：v14.3.140 1、添加BaseGroupMessageDataByGroupId.send_ignore_reprint属性
                         2、优化代码
 
-    修改标识：Senparc - 20170707
-    修改描述：v14.5.1 完善异步方法async/await
-
 ----------------------------------------------------------------*/
 
 /* 
@@ -500,7 +497,7 @@ namespace Senparc.Weixin.MP.AdvancedAPIs
         /// <returns></returns>
         public static async Task<SendResult> SendGroupMessageByGroupIdAsync(string accessTokenOrAppId, string groupId, string value, GroupMessageType type, bool isToAll = false, bool sendIgnoreReprint = false, int timeOut = Config.TIME_OUT)
         {
-            return await ApiHandlerWapper.TryCommonApiAsync(async accessToken =>
+            return await ApiHandlerWapper.TryCommonApiAsync(accessToken =>
             {
                 const string urlFormat = "https://api.weixin.qq.com/cgi-bin/message/mass/sendall?access_token={0}";
 
@@ -585,7 +582,7 @@ namespace Senparc.Weixin.MP.AdvancedAPIs
 
                 baseData.send_ignore_reprint = sendIgnoreReprint ? 0 : 1;//待群发的文章被判定为转载时，是否继续群发
 
-                return await Senparc.Weixin.CommonAPIs.CommonJsonSend.SendAsync<SendResult>(accessToken, urlFormat, baseData, timeOut: timeOut);
+                return Senparc.Weixin.CommonAPIs.CommonJsonSend.SendAsync<SendResult>(accessToken, urlFormat, baseData, timeOut: timeOut);
 
             }, accessTokenOrAppId);
         }
@@ -601,7 +598,7 @@ namespace Senparc.Weixin.MP.AdvancedAPIs
         /// <returns></returns>
         public static async Task<SendResult> SendGroupMessageByOpenIdAsync(string accessTokenOrAppId, GroupMessageType type, string value, int timeOut = Config.TIME_OUT, params string[] openIds)
         {
-            return await ApiHandlerWapper.TryCommonApiAsync(async accessToken =>
+            return await ApiHandlerWapper.TryCommonApiAsync(accessToken =>
             {
                 const string urlFormat = "https://api.weixin.qq.com/cgi-bin/message/mass/send?access_token={0}";
 
@@ -670,7 +667,7 @@ namespace Senparc.Weixin.MP.AdvancedAPIs
                         throw new Exception("参数错误。");
                         //break;
                 }
-                return await Senparc.Weixin.CommonAPIs.CommonJsonSend.SendAsync<SendResult>(accessToken, urlFormat, baseData, timeOut: timeOut);
+                return Senparc.Weixin.CommonAPIs.CommonJsonSend.SendAsync<SendResult>(accessToken, urlFormat, baseData, timeOut: timeOut);
 
             }, accessTokenOrAppId);
         }
@@ -688,7 +685,7 @@ namespace Senparc.Weixin.MP.AdvancedAPIs
         /// <returns></returns>
         public static async Task<SendResult> SendVideoGroupMessageByOpenIdAsync(string accessTokenOrAppId, string title, string description, string mediaId, int timeOut = Config.TIME_OUT, params string[] openIds)
         {
-            return await ApiHandlerWapper.TryCommonApiAsync(async accessToken =>
+            return await ApiHandlerWapper.TryCommonApiAsync(accessToken =>
             {
                 const string urlFormat = "https://api.weixin.qq.com/cgi-bin/message/mass/send?access_token={0}";
 
@@ -704,7 +701,7 @@ namespace Senparc.Weixin.MP.AdvancedAPIs
                     msgtype = "mpvideo"
                 };
 
-                return await Senparc.Weixin.CommonAPIs.CommonJsonSend.SendAsync<SendResult>(accessToken, urlFormat, baseData, timeOut: timeOut);
+                return Senparc.Weixin.CommonAPIs.CommonJsonSend.SendAsync<SendResult>(accessToken, urlFormat, baseData, timeOut: timeOut);
 
             }, accessTokenOrAppId);
         }
@@ -718,7 +715,7 @@ namespace Senparc.Weixin.MP.AdvancedAPIs
         /// <returns></returns>
         public static async Task<WxJsonResult> DeleteSendMessageAsync(string accessTokenOrAppId, string msgId, int timeOut = Config.TIME_OUT)
         {
-            return await ApiHandlerWapper.TryCommonApiAsync(async accessToken =>
+            return await ApiHandlerWapper.TryCommonApiAsync(accessToken =>
             {
                 //官方API地址为https://api.weixin.qq.com//cgi-bin/message/mass/delete?access_token={0}，应该是多了一个/
                 const string urlFormat = "https://api.weixin.qq.com/cgi-bin/message/mass/delete?access_token={0}";
@@ -727,7 +724,7 @@ namespace Senparc.Weixin.MP.AdvancedAPIs
                 {
                     msg_id = msgId
                 };
-                return await Senparc.Weixin.CommonAPIs.CommonJsonSend.SendAsync<WxJsonResult>(accessToken, urlFormat, data, timeOut: timeOut);
+                return Senparc.Weixin.CommonAPIs.CommonJsonSend.SendAsync<WxJsonResult>(accessToken, urlFormat, data, timeOut: timeOut);
 
             }, accessTokenOrAppId);
         }
@@ -745,7 +742,7 @@ namespace Senparc.Weixin.MP.AdvancedAPIs
         /// <returns></returns>
         public static async Task<SendResult> SendGroupMessagePreviewAsync(string accessTokenOrAppId, GroupMessageType type, string value, string openId, string wxName = null, int timeOut = Config.TIME_OUT)
         {
-            return await ApiHandlerWapper.TryCommonApiAsync(async accessToken =>
+            return await ApiHandlerWapper.TryCommonApiAsync(accessToken =>
             {
                 const string urlFormat = "https://api.weixin.qq.com/cgi-bin/message/mass/preview?access_token={0}";
 
@@ -817,7 +814,7 @@ namespace Senparc.Weixin.MP.AdvancedAPIs
                     default:
                         throw new Exception("参数错误。");
                 }
-                return await Senparc.Weixin.CommonAPIs.CommonJsonSend.SendAsync<SendResult>(accessToken, urlFormat, baseData, timeOut: timeOut);
+                return Senparc.Weixin.CommonAPIs.CommonJsonSend.SendAsync<SendResult>(accessToken, urlFormat, baseData, timeOut: timeOut);
 
             }, accessTokenOrAppId);
         }
@@ -837,7 +834,7 @@ namespace Senparc.Weixin.MP.AdvancedAPIs
         public static async Task<SendResult> WxCardGroupMessagePreviewAsync(string accessTokenOrAppId, string cardId, string code,
             string openId, string wxName, string timestamp, string signature, int timeOut = Config.TIME_OUT)
         {
-            return await ApiHandlerWapper.TryCommonApiAsync(async accessToken =>
+            return await ApiHandlerWapper.TryCommonApiAsync(accessToken =>
             {
                 const string urlFormat = "https://api.weixin.qq.com/cgi-bin/message/mass/preview?access_token={0}";
 
@@ -853,7 +850,7 @@ namespace Senparc.Weixin.MP.AdvancedAPIs
                     msgtype = "wxcard"
                 };
 
-                return await Senparc.Weixin.CommonAPIs.CommonJsonSend.SendAsync<SendResult>(accessToken, urlFormat, baseData, timeOut: timeOut);
+                return Senparc.Weixin.CommonAPIs.CommonJsonSend.SendAsync<SendResult>(accessToken, urlFormat, baseData, timeOut: timeOut);
 
             }, accessTokenOrAppId);
         }
@@ -867,7 +864,7 @@ namespace Senparc.Weixin.MP.AdvancedAPIs
         /// <returns></returns>
         public static async Task<GetSendResult> GetGroupMessageResultAsync(string accessTokenOrAppId, string msgId, int timeOut = Config.TIME_OUT)
         {
-            return await ApiHandlerWapper.TryCommonApiAsync(async accessToken =>
+            return await ApiHandlerWapper.TryCommonApiAsync(accessToken =>
             {
                 const string urlFormat = "https://api.weixin.qq.com/cgi-bin/message/mass/get?access_token={0}";
 
@@ -876,7 +873,7 @@ namespace Senparc.Weixin.MP.AdvancedAPIs
                     msg_id = msgId
                 };
 
-                return await Senparc.Weixin.CommonAPIs.CommonJsonSend.SendAsync<GetSendResult>(accessToken, urlFormat, data, timeOut: timeOut);
+                return Senparc.Weixin.CommonAPIs.CommonJsonSend.SendAsync<GetSendResult>(accessToken, urlFormat, data, timeOut: timeOut);
 
             }, accessTokenOrAppId);
         }
@@ -893,7 +890,7 @@ namespace Senparc.Weixin.MP.AdvancedAPIs
         public static async Task<VideoMediaIdResult> GetVideoMediaIdResultAsync(string accessTokenOrAppId, string mediaId, string title,
             string description, int timeOut = Config.TIME_OUT)
         {
-            return await ApiHandlerWapper.TryCommonApiAsync(async accessToken =>
+            return await ApiHandlerWapper.TryCommonApiAsync(accessToken =>
             {
                 string url = string.Format("https://file.api.weixin.qq.com/cgi-bin/media/uploadvideo?access_token={0}", accessToken.AsUrlData());
 
@@ -904,7 +901,7 @@ namespace Senparc.Weixin.MP.AdvancedAPIs
                     description = description
                 };
 
-                return await Senparc.Weixin.CommonAPIs.CommonJsonSend.SendAsync<VideoMediaIdResult>(null, url, data, CommonJsonSendType.POST, timeOut, true);
+                return Senparc.Weixin.CommonAPIs.CommonJsonSend.SendAsync<VideoMediaIdResult>(null, url, data, CommonJsonSendType.POST, timeOut, true);
 
             }, accessTokenOrAppId);
         }
